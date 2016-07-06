@@ -4,7 +4,7 @@ html(lang='en')
     base(href='/')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(href='styles.min.css' rel='stylesheet' type='text/css')
+    link(href='dist/styles.min.css' rel='stylesheet' type='text/css')
   body#app
     .mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--no-drawer-button
       header.mdl-layout__header
@@ -28,5 +28,5 @@ html(lang='en')
     script(src='http://localhost:3002/socket.io/socket.io.js')
     script.
       var socket = io('http://localhost:3002')
-    script(src='bundle.min.js')
+    script(src='dist/bundle.min.js')
 
