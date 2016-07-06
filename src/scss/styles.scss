@@ -1,0 +1,50 @@
+// Material Design Lite
+@import 'http://fonts.googleapis.com/css?family=Roboto:300,400,500,700';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '../../node_modules/material-design-lite/material';
+
+.hide-mobile {
+  @media screen and (max-width: 533px) {
+    display: none;
+  }
+}
+
+.list-matches tr:hover {
+  cursor: pointer;
+}
+
+.space {
+  height: 100%;
+}
+
+.page-content {
+  max-width: 1440px;
+}
+
+.padding-vertical {
+  height: 20px;
+}
+
+.host-match-card > .mdl-card__title {
+  color: #fff;
+  height: 150px;
+  background: url('https://s-media-cache-ak0.pinimg.com/564x/aa/12/f0/aa12f0de63b8c5d9d81fc1adba09d20d.jpg') center / cover;
+  background-position: 0 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.host-match-card > .mdl-card__menu {
+  color: #fff;
+}
+
+.host-match-card > .mdl-card__actions {
+  display: flex;
+  box-sizing:border-box;
+  align-items: center;
+}
+
+.host-match-card > .mdl-card__supporting-text > label {
+  font-size: 12px;
+}
+

@@ -1,0 +1,32 @@
+doctype html
+html(lang='en')
+  head
+    base(href='/')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='styles.min.css' rel='stylesheet' type='text/css')
+  body#app
+    .mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--no-drawer-button
+      header.mdl-layout__header
+        .mdl-layout__header-row
+          span.mdl-layout-title MTG Client
+          .mdl-layout-spacer
+          nav.mdl-navigation.mdl-layout--large-screen-only
+            a.mdl-navigation__link(href='') Link
+            a.mdl-navigation__link(href='') Link
+            a.mdl-navigation__link(href='') Link
+            a.mdl-navigation__link(href='') Link
+      .mdl-layout__drawer
+        span.mdl-layout-title Title
+        nav.mdl-navigation
+          a.mdl-navigation__link(href='') Link
+          a.mdl-navigation__link(href='') Link
+          a.mdl-navigation__link(href='') Link
+          a.mdl-navigation__link(href='') Link
+      main.mdl-layout__content.mdl-color--grey-100
+        router-view
+    script(src='http://localhost:3002/socket.io/socket.io.js')
+    script.
+      var socket = io('http://localhost:3002')
+    script(src='bundle.min.js')
+
