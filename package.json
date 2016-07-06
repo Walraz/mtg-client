@@ -4,7 +4,7 @@
   "description": "MTG Client",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp build && node index.html"
   },
   "repository": {
     "type": "git",

@@ -72,3 +72,5 @@ gulp.task('watch', ['sass', 'build', 'pug'], function () {
 })
 
 gulp.task('default', ['serve'])
+
+gulp.task('build', ['sass', 'build', 'pug'])
