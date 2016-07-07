@@ -67,7 +67,7 @@ export default {
   methods: {
     createMatch: function () {
       this.host.Time_Created = moment().format('YYYY-MM-DDTHH:mm:ss')
-      this.$http.post('https://magictg-api.azurewebsites.net/1/mtg-games', this.host).then((res) => {
+      this.$http.post('http://magictg-api.azurewebsites.net/1/mtg-games', this.host).then((res) => {
         this.host = ''
         let data = JSON.parse(res.body)
         socket.emit('created match', 'GameId_' + data.Id)
@@ -80,7 +80,7 @@ export default {
       }
       if(!gameOn) {
         match.Game_On = true
-        this.$http.put('https://magictg-api.azurewebsites.net/1/mtg-games', match).then((res) => {
+        this.$http.put('http://magictg-api.azurewebsites.net/1/mtg-games', match).then((res) => {
           let data = JSON.parse(res.body)
           socket.emit('joined match', data.Id)
         })
@@ -92,7 +92,7 @@ export default {
   },
   ready () {
     let vm = this
-    this.$http.get('https://magictg-api.azurewebsites.net/1/mtg-games').then((res) => {
+    this.$http.get('http://magictg-api.azurewebsites.net/1/mtg-games').then((res) => {
       let data = JSON.parse(res.body)
       data.forEach((host) => {
         host.Game_On = vm.isGameOn(host.Game_On)
