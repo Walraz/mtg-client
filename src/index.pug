@@ -25,9 +25,9 @@ html(lang='en')
           a.mdl-navigation__link(href='') Link
       main.mdl-layout__content.mdl-color--grey-100
         router-view
-    script(src='http://magictg-api.azurewebsites.net/socket.io/socket.io.js')
+    script(src='@@SOCKET')
     script.
-      var socket = io('http://magictg-api.azurewebsites.net', {
+      var socket = io('@@API', {
       reconnection: true
       })
     script(src='bundle.min.js')

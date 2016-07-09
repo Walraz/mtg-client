@@ -6,8 +6,12 @@ import VueResource from 'vue-resource'
 
 // Components
 import HomeComponent from './components/home.vue'
+import LobbyComponent from './components/lobby.vue'
 import MatchComponent from './components/match.vue'
+
+window.URL = { 'SOCKET': '@@SOCKET', 'API': '@@API' }
 window.Vue = Vue;
+
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
@@ -36,6 +40,10 @@ var App = Vue.extend({})
 router.map({
     '/': {
       component: HomeComponent
+    },
+    '/lobby': {
+      name: 'lobby',
+      component: LobbyComponent
     },
     '/match/:id': {
         name: 'match',

@@ -3,6 +3,10 @@
 @import 'http://fonts.googleapis.com/icon?family=Material+Icons';
 @import '../../node_modules/material-design-lite/material';
 
+.page-content {
+  justify-content: center;
+}
+
 .hide-mobile {
   @media screen and (max-width: 533px) {
     display: none;
@@ -25,6 +29,19 @@
   height: 20px;
 }
 
+.login-card > .mdl-card__title {
+  color: #fff;
+  height: 150px;
+  background: url('http://wallpaper.zone/thumb/1804910.jpg') center / cover;
+  background-position: 0 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.login-card .mdl-textfield {
+  width: 100%;
+}
+
 .host-match-card > .mdl-card__title {
   color: #fff;
   height: 150px;
@@ -34,7 +51,7 @@
   background-repeat: no-repeat;
 }
 
-.host-match-card > .mdl-card__menu {
+.host-match-card,.login-card > .mdl-card__menu {
   color: #fff;
 }
 
