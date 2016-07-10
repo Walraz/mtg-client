@@ -41,9 +41,9 @@ Vue.directive('remove-old-host', {
     let that = this
 
     function isOldHost(time) {
-      let start = moment(time).utc()
-      let end   = moment(start).utc().add(1, 'h')
-      let now   = moment.utc()
+      let start = moment(time).format('YYYY-MM-DD HH:mm:ss')
+      let end   = moment(start).add(1, 'h')
+      let now   = moment()
       var range = moment.range(start, end)
       console.log(start)
       console.log(now.within(range))
