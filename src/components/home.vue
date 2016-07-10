@@ -30,6 +30,14 @@ export default {
         this.$router.go({name:'lobby'})
       }
     }
+  },
+  ready () {
+    this.$nextTick(() => {
+       componentHandler.upgradeDom();
+    })
+    this.$nextTick(() => {
+      componentHandler.upgradeAllRegistered()
+    })
   }
 }
 </script>

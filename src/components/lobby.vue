@@ -27,14 +27,15 @@
           th.mdl-data-table__cell--non-numeric Players
           th.mdl-data-table__cell--non-numeric Structure
       tbody
-        tr(v-for="match in hostedMatches | filterBy 'false' in 'Game_On' | orderBy 'Time_Created' -1" @click='startDuel(match.Game_On, match.Id)')
-          td.mdl-data-table__cell--non-numeric.hide-mobile
-            div(v-moment-ago='match.Time_Created')
-          td.mdl-data-table__cell--non-numeric
-            |  {{ match.Host }},
-            span(style='color: #67FFB0; font-weight: 700' v-show='!match.Game_On')  (Open)
-            span(v-show='match.Game_On')  {{ match.Opponents }}
-          td.mdl-data-table__cell--non-numeric {{ match.Structure }}
+        template(v-for="match in hostedMatches | filterBy 'false' in 'Game_On' | orderBy 'Time_Created' -1")
+          tr(v-remove-old-host="match.Time_Created" @click='startDuel(match.Game_On, match.Id)')
+            td.mdl-data-table__cell--non-numeric.hide-mobile
+              div(v-moment-ago='match.Time_Created')
+            td.mdl-data-table__cell--non-numeric
+              |  {{ match.Host }},
+              span(style='color: #67FFB0; font-weight: 700' v-show='!match.Game_On')  (Open)
+              span(v-show='match.Game_On')  {{ match.Opponents }}
+            td.mdl-data-table__cell--non-numeric {{ match.Structure }}
     .padding-vertical.mdl-cell.mdl-cell--12-col
     table.list-matches.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col(v-if='hostedMatches.length')
       thead
@@ -108,6 +109,12 @@ export default {
     })
     socket.on('start match', function(id) {
       vm.$router.go({name:'match', params: {id: id}})
+    })
+    this.$nextTick(() => {
+       componentHandler.upgradeDom();
+    })
+    this.$nextTick(() => {
+      componentHandler.upgradeAllRegistered()
     })
   }
 }

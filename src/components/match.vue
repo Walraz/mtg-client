@@ -8,6 +8,14 @@ export default {
     return {
       msg: 'Match!'
     }
+  },
+  ready () {
+    this.$nextTick(() => {
+       componentHandler.upgradeDom();
+    })
+    this.$nextTick(() => {
+      componentHandler.upgradeAllRegistered()
+    })
   }
 }
 </script>

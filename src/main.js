@@ -3,6 +3,7 @@ import mdl from 'material-design-lite'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import momentRange from 'moment-range'
 
 // Components
 import HomeComponent from './components/home.vue'
@@ -31,6 +32,34 @@ Vue.directive('moment-ago', {
   },
 
   unbind () {
+    clearInterval(this.interval)
+  }
+})
+
+Vue.directive('remove-old-host', {
+  update: function (timestamp) {
+    let that = this
+
+    function isOldHost(time) {
+      let start = moment(time)
+      let end   = moment(start).add(1, 'h')
+      let now   = moment()
+      var range = moment.range(start, end)
+      if(now.within(range)) {
+        that.el.style.display = 'table-row'
+      } else {
+        that.el.style.display = 'none'
+      }
+    }
+
+    isOldHost(timestamp)
+
+    this.interval = setInterval(() => {
+      isOldHost(timestamp)
+    }, 60000)
+
+  },
+  unbind: function () {
     clearInterval(this.interval)
   }
 })
