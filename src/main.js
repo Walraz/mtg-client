@@ -3,7 +3,6 @@ import mdl from 'material-design-lite'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import momentRange from 'moment-range'
 
 // Components
 import HomeComponent from './components/home.vue'
@@ -42,12 +41,10 @@ Vue.directive('remove-old-host', {
 
     function isOldHost(time) {
 
-      let start = moment(time)
-      let end   = moment(start).add(1, 'h')
+      let start = moment(time).utc()
+      let end   = moment(start).utc().add(1, 'h')
       let now   = moment().utc()
-      var range = moment.range(start, end)
-      console.log(now.within(range))
-      if(now.within(range)) {
+      if(moment(now).utc().isBetween(start, end)) {
         that.el.style.display = 'table-row'
       } else {
         that.el.style.display = 'none'
