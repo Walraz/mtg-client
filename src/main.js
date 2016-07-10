@@ -41,9 +41,8 @@ Vue.directive('remove-old-host', {
 
     function isOldHost(time) {
 
-      let start = moment(time).format('YYYY-MM-DD HH:mm:ss')
-      let end   = moment(start).add(1, 'h').format('YYYY-MM-DD HH:mm:ss')
-      if(moment().utc().isBetween(start, end)) {
+      let end   = moment(time).add(1, 'h')
+      if(moment().utc().isBetween(time, end)) {
         that.el.style.display = 'table-row'
       } else {
         that.el.style.display = 'none'
