@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     createMatch: function () {
-      this.host.Time_Created = moment.format('YYYY-MM-DD HH:mm:ss')
+      this.host.Time_Created = moment.utc().format('YYYY-MM-DD HH:mm:ss')
       this.$http.post(URL.API+'/1/mtg-games', this.host).then((res) => {
         let data = JSON.parse(res.body)
         socket.emit('created match', 'GameId_' + data.Id)
