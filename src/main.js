@@ -23,10 +23,10 @@ let router = new VueRouter({
 
 Vue.directive('moment-ago', {
   update (timestamp) {
-    this.el.innerHTML = moment(timestamp).utc().fromNow()
+    this.el.innerHTML = moment(timestamp).fromNow()
 
     this.interval = setInterval(() => {
-      this.el.innerHTML = moment(timestamp).utc().fromNow()
+      this.el.innerHTML = moment(timestamp).fromNow()
     }, 60000)
   },
 
@@ -40,13 +40,8 @@ Vue.directive('remove-old-host', {
     let that = this
 
     function isOldHost(time) {
-
-      let start = moment(time).utc().format('YYYY-MM-DD HH:mm:ss')
-      var localTimeStart  = moment.utc(start).toDate();
-      localTimeStart = moment(localTimeStart).format('YYYY-MM-DD HH:mm:ss')
-
-      let end   = moment(localTimeStart).add(1, 'h').format('YYYY-MM-DD HH:mm:ss')
-      if(moment().isBetween(localTimeStart, end)) {
+      let end = moment(time).add(1, 'h')
+      if(moment().isBetween(time, end)) {
         that.el.style.display = 'table-row'
       } else {
         that.el.style.display = 'none'
