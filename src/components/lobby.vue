@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 export default {
   data: function () {
     return {
@@ -63,7 +62,6 @@ export default {
   },
   methods: {
     createMatch: function () {
-      this.host.Time_Created = moment.utc().format('YYYY-MM-DD HH:mm:ss')
       this.$http.post(URL.API+'/1/mtg-games', this.host).then((res) => {
         let data = JSON.parse(res.body)
         socket.emit('created match', 'GameId_' + data.Id)
@@ -88,11 +86,13 @@ export default {
   },
   ready () {
     let vm = this
+    // Get Hosts
     this.$http.get(URL.API+'/1/mtg-games').then((res) => {
       let data = JSON.parse(res.body)
       data.forEach((host) => {
         host.Game_On = vm.isGameOn(host.Game_On)
       })
+      console.log(data)
       vm.hostedMatches = data
     }, (err) => {
       console.log(err.status)
