@@ -20,7 +20,7 @@
           i.material-icons share
     .space.mdl-cell--1-col
   .mdl-cell.mdl-cell--8-col.mdl-cell--8-col-tablet.mdl-cell--12-col-phone.mdl-grid.mdl-grid--no-spacing
-    table.list-matches.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col(v-if='hostedMatches.length')
+    table.list-matches.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col(v-show='isGames(false)')
       thead
         tr
           th.mdl-data-table__cell--non-numeric.hide-mobile Status
@@ -36,8 +36,8 @@
               span(style='color: #67FFB0; font-weight: 700' v-show='!match.Game_On')  (Open)
               span(v-show='match.Game_On')  {{ match.Opponents }}
             td.mdl-data-table__cell--non-numeric {{ match.Structure }}
-    .padding-vertical.mdl-cell.mdl-cell--12-col
-    table.list-matches.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col(v-if='hostedMatches.length')
+    .padding-vertical.mdl-cell.mdl-cell--12-col(v-show='isGames(false) || !isGames(true)')
+    table.list-matches.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col(v-show='isGames(true)')
       thead
         tr
           th.mdl-data-table__cell--non-numeric.hide-mobile Status
@@ -62,6 +62,15 @@ export default {
     }
   },
   methods: {
+    isGames: function(state) {
+      var isGame = false
+      this.hostedMatches.forEach((game) => {
+        if(game.Game_On === state) {
+          isGame = true
+        }
+      })
+      return isGame
+    },
     createMatch: function () {
       this.$http.post(URL.API+'/1/mtg-games', this.host).then((res) => {
         let data = JSON.parse(res.body)
@@ -91,6 +100,7 @@ export default {
     this.$http.get(URL.API+'/1/mtg-games').then((res) => {
       let data = JSON.parse(res.body)
       data.forEach((host) => {
+        host.Time_Created = moment(host.Time_Created).format('YYYY-MM-DD HH:mm:ss+00:00')
         host.Game_On = vm.isGameOn(host.Game_On)
       })
       vm.hostedMatches = data
@@ -98,12 +108,14 @@ export default {
       console.log(err.status)
     })
     socket.on('create match', function(host) {
+      host.Time_Created = moment(host.Time_Created).format('YYYY-MM-DD HH:mm:ss+00:00')
       host.Game_On = vm.isGameOn(host.Game_On)
       vm.hostedMatches.push(host)
     })
     socket.on('join match', function(match) {
       let matchRoom = 'GameId_' + match.Id
       let id = vm.hostedMatches.map(function(e) { return e.Id; }).indexOf(match.Id)
+      vm.hostedMatches[id].Time_Created = moment(match.Time_Created).format('YYYY-MM-DD HH:mm:ss+00:00')
       vm.hostedMatches[id].Game_On = match.Game_On
       vm.hostedMatches[id].Opponents = match.Opponents
     })
