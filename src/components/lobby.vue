@@ -100,8 +100,7 @@ export default {
     this.$http.get(URL.API+'/1/mtg-games').then((res) => {
       let data = JSON.parse(res.body)
       data.forEach((host) => {
-        let utc = moment(host.Time_Created).format('YYYY-MM-DD HH:mm:ss+00:00')
-        host.Time_Created = moment(utc).format('YYYY-MM-DD HH:mm:ss')
+        host.Time_Created = moment(host.Time_Created).format('YYYY-MM-DD HH:mm:ss+00:00')
         console.log(host.Time_Created)
         host.Game_On = vm.isGameOn(host.Game_On)
       })
