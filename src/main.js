@@ -3,6 +3,7 @@ import mdl from 'material-design-lite'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import $ from 'jquery'
 
 // Components
 import HomeComponent from './components/home.vue'
@@ -61,10 +62,20 @@ Vue.directive('remove-old-host', {
   }
 })
 
-var App = Vue.extend({})
+var App = Vue.extend({
+  methods: {
+    logout: function() {
+      $('.mdl-layout__obfuscator').toggleClass("is-visible")
+      $('.mdl-layout__drawer').toggleClass("is-visible")
+      localStorage.removeItem('username')
+      router.go({name:'home'})
+    }
+  }
+})
 
 router.map({
     '/': {
+      name: 'home',
       component: HomeComponent
     },
     '/lobby': {

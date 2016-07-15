@@ -32,6 +32,9 @@ export default {
     }
   },
   ready () {
+    if(localStorage.getItem('username') !== null) {
+      this.$router.go({name:'lobby'})
+    }
     this.$nextTick(() => {
        componentHandler.upgradeDom();
     })
