@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   data: function () {
     return {
@@ -90,6 +91,7 @@ export default {
     this.$http.get(URL.API+'/1/mtg-games').then((res) => {
       let data = JSON.parse(res.body)
       data.forEach((host) => {
+        host.Time_Created = moment(host.Time_Created).format('YYYY-MM-DD HH:mm:ss')
         host.Game_On = vm.isGameOn(host.Game_On)
       })
       console.log(data)
