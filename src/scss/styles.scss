@@ -13,6 +13,45 @@
   background-color: #D4F6FF;
 }
 
+.chat {
+  height: calc(100vh - 50px);
+  background: white;
+  padding: 10px;
+
+  .chat-input {
+  }
+
+  .chat-messages {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-flow: column;
+    height: calc(100% - 110px);
+
+    .user {
+      font-weight: bold;
+    }
+
+    .me {
+      color: orange;
+    }
+
+    .you {
+      color: lightblue;
+    }
+
+    .space {
+      height: auto;
+    }
+  }
+}
+
+.battlefield {
+  width: 100%;
+  height: calc(100vh - 50px);
+  background: darkgreen;
+}
+
 .hide-mobile {
   @media screen and (max-width: 533px) {
     display: none;
