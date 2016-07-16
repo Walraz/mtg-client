@@ -24,8 +24,9 @@ let router = new VueRouter({
 
 Vue.directive('moment-ago', {
   update (timestamp) {
+    console.log(timestamp)
     this.el.innerHTML = moment(timestamp).fromNow()
-
+    console.log(moment(timestamp).format('YYYY-DD-MM HH:mm:ss'))
     this.interval = setInterval(() => {
       this.el.innerHTML = moment(timestamp).fromNow()
     }, 60000)

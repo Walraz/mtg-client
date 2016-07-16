@@ -107,14 +107,12 @@ export default {
       console.log(err.status)
     })
     socket.on('create match', function(host) {
-      //host.Time_Created = moment(host.Time_Created).format('YYYY-MM-DD HH:mm:ss+00:00')
       host.Game_On = vm.isGameOn(host.Game_On)
       vm.hostedMatches.push(host)
     })
     socket.on('join match', function(match) {
       let matchRoom = 'GameId_' + match.Id
       let id = vm.hostedMatches.map(function(e) { return e.Id; }).indexOf(match.Id)
-      //vm.hostedMatches[id].Time_Created = moment(match.Time_Created).format('YYYY-MM-DD HH:mm:ss+00:00')
       vm.hostedMatches[id].Game_On = match.Game_On
       vm.hostedMatches[id].Opponents = match.Opponents
     })
