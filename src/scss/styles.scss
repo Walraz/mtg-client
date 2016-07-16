@@ -9,6 +9,10 @@
   justify-content: center;
 }
 
+.isHost {
+  background: #D4F6FF;
+}
+
 .hide-mobile {
   @media screen and (max-width: 533px) {
     display: none;
